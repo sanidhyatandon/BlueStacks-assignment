@@ -1,0 +1,17 @@
+.react-calendar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+.react-date-picker__wrapper {
+  border: none;
+  display: block;
+
+  .react-date-picker__inputGroup,
+  .react-date-picker__clear-button__icon {
+    display: none;
+  }
+  .react-date-picker__calendar-button {
+    display: none;
+  }
+}

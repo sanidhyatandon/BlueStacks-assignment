@@ -1,0 +1,15 @@
+.modal-body {
+  position: absolute !important;
+  background-color: #fff;
+  border: '2px solid #000';
+  left: 30%;
+  top: 30%;
+  width: 500px;
+
+  & button {
+    position: absolute;
+    bottom: 10px;
+    width: 120px;
+    left: 35%;
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "campaignList": [
+    {
+      "campaignId": "1",
+      "name": "Test Whatsapp",
+      "region": "US",
+      "createdOn": 1559807714999,
+      "price": [
+        {
+          "monthly": 100.0
+        },
+        {
+          "halfYearly": 500
+        },
+        {
+          "annually": 900
+        }
+      ],
+      "csv": "Some CSV link for Whatsapp",
+      "report": "Some report link for Whatsapp",
+      "image_url": "game-1.png"
+    },
+    {
+      "campaignId": "2",
+
+      "name": "Super Jewels Quest",
+      "region": "CA, FR",
+      "createdOn": 1559806715124,
+      "price": [
+        {
+          "monthly": 100.0
+        },
+        {
+          "halfYearly": 500
+        },
+        {
+          "annually": 900
+        }
+      ],
+      "csv": "Some CSV link for Super Jewels Quest",
+      "report": "Some report link for Super Jewels Ques",
+      "image_url": "game-2.png"
+    },
+    {
+      "campaignId": "3",
+      "name": "Mancala Mix",
+      "region": "JP",
+      "createdOn": 1615361880124,
+      "price": [
+        {
+          "monthly": 100.0
+        },
+        {
+          "halfYearly": 500
+        },
+        {
+          "annually": 900
+        }
+      ],
+      "csv": "Some CSV link for Mancala Mix",
+      "report": "Some report link for Mancala Mix",
+      "image_url": "game-3.png"
+    },
+    {
+      "campaignId": "4",
+
+      "name": "Road Rash",
+      "region": "JP",
+      "createdOn": 1659685080124,
+      "price": [
+        {
+          "monthly": 100.0
+        },
+        {
+          "halfYearly": 500
+        },
+        {
+          "annually": 900
+        }
+      ],
+      "csv": "Some CSV link for Mancala Mix",
+      "report": "Some report link for Mancala Mix",
+      "image_url": "game-4.png"
+    },
+    {
+      "campaignId": "5",
+
+      "name": "Midtown Madness",
+      "region": "JP",
+      "createdOn": 1615492888124,
+      "price": [
+        {
+          "monthly": 100.0
+        },
+        {
+          "halfYearly": 500
+        },
+        {
+          "annually": 900
+        }
+      ],
+      "csv": "Some CSV link for Mancala Mix",
+      "report": "Some report link for Mancala Mix",
+      "image_url": "game-5.png"
+    },
+    {
+      "campaignId": "6",
+
+      "name": "Shadow Warrior",
+      "region": "JP",
+      "createdOn": 1615492888124,
+      "price": [
+        {
+          "monthly": 100.0
+        },
+        {
+          "halfYearly": 500
+        },
+        {
+          "annually": 900
+        }
+      ],
+      "csv": "Some CSV link for Mancala Mix",
+      "report": "Some report link for Mancala Mix",
+      "image_url": "game-6.png"
+    }
+  ]
+}
