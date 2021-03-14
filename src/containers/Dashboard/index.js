@@ -4,8 +4,6 @@ import axios from 'axios';
 import apiConfig from '../../api.config';
 import DashboardView from '../../components/Dashboard';
 
-import Loader from '../../common/Loader';
-
 const Dashboard = () => {
   const [campaigns, setCampaigns] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -51,7 +49,6 @@ const Dashboard = () => {
           <div> No Data Available</div>
         )}
       </div>
-      {isLoading && <Loader />}
     </div>
   );
 };

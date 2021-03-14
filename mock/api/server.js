@@ -9,15 +9,6 @@ const middlewares = jsonServer.defaults();
 server.use('/static', express.static(path.join(__dirname, 'public')));
 
 server.use(middlewares);
-// server.use((req, res, next) => {
-//   if (req.method === 'POST') {
-//     // Converts POST to GET and move payload to query params
-//     // This way it will make JSON Server that it's GET request
-//     req.method = 'GET';
-//   }
-//   // Continue to JSON Server router
-//   next();
-// });
 server.use(jsonServer.rewriter(routes));
 server.use(router);
 server.listen(3004, () => {});
