@@ -1,19 +1,30 @@
 .dashboard {
   margin: 100px 100px 0 100px;
-  .tabs {
+  .tab-list {
+    padding: 0;
+  }
+  .tab-list-item {
+    cursor: pointer;
+    display: inline-block;
+    list-style: none;
+    font-size: 1rem;
+    padding: 8px 24px;
+  }
+
+  .tab-list-active {
+    color: #16a769;
+    border-bottom: 2px solid #16a769;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin: 0;
+
     .tab-list {
-      padding: 0;
-    }
-    .tab-list-item {
-      cursor: pointer;
-      display: inline-block;
-      list-style: none;
-      padding: 10px 20px;
+      display: flex;
     }
 
-    .tab-list-active {
-      color: #16a769;
-      border-bottom: 2px solid #16a769;
+    .tab-list-item {
+      font-size: 0.875rem;
     }
   }
 }

@@ -2,6 +2,10 @@
   position: absolute;
   left: 50%;
   top: 50%;
+  @media screen and (max-width: 768px) {
+    left: 0;
+    top: 0;
+  }
 }
 .react-date-picker__wrapper {
   border: none;

@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Tabs from '../../common/Tabs';
 import Campaigns from '../Campaigns';
-import { checkDateStatus } from '../../common/utilities';
+import { checkDateStatus, isMobileDevice } from '../../common/utilities';
 import { LIVE, PAST, UPCOMING } from '../../constants';
 
 import './styles/index.scss';
@@ -12,9 +12,11 @@ const Dashboard = props => {
   const liveCampaigns = campaigns.filter(campaign => checkDateStatus(campaign.createdOn) === LIVE);
   const pastCampaigns = campaigns.filter(campaign => checkDateStatus(campaign.createdOn) === PAST);
   const upcomingCampaigns = campaigns.filter(campaign => checkDateStatus(campaign.createdOn) === UPCOMING);
+  // to check if mobile device.
+  const isMobile = isMobileDevice();
   return (
     <div className="dashboard">
-      <h3>{t('campaignTitle')}</h3>
+      <h3 className={isMobile && 'ml-24'}>{t('campaignTitle')}</h3>
       <Tabs>
         <div label="Upcoming Campaigns" tabTitle={t('upcomingCampaigns')}>
           <Campaigns campaigns={upcomingCampaigns} scheduleCampaign={scheduleCampaign} />

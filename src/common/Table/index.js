@@ -158,7 +158,6 @@ TableRow.defaultProps = {
 
 /**
  * TableHeaderCell component contains native th tag implementation, which can also be called from a custom Header component.
- * Sorting can also be added with headers passed as config.
  * @param {TableHeaderCell~propTypes} props - TableHeaderCell props.
  * @returns {ReactElement}
  */
@@ -184,7 +183,7 @@ const TableHeaderCell = props => {
   let key;
   let htmlProps = {};
   if (typeof headerLabel === 'object') {
-    const { label, sortKey, desc, ...remProps } = headerCelldata;
+    const { label, desc, ...remProps } = headerCelldata;
     htmlProps = remProps;
     headerLabel = label;
   }
@@ -202,8 +201,6 @@ const TableHeaderCell = props => {
  * @typedef {Object} TableHeaderCell~propTypes
  * @property {Object|string} [headerCelldata=''] This hold headerCelldata for the headerCell.
  * @property {string} [className=''] ClassName for TableHeader cell.
- * @property {string} [activeSort='' ] Active Sort.
- * @property {func} [sortMethod=()=>{}] function for Active Sort.
  * @property {(string|node)} [children=null] Children for the Table Row.
  * @property {number} [paddingLevelHeaderY=1] paddingLevelHeaderY for the TableHeaderCell.
  * @property {number} [paddingLevelHeaderX=0] paddingLevelHeaderX for the TableHeaderCell.
@@ -221,8 +218,6 @@ TableHeaderCell.propTypes = {
   paddingLevelHeaderY: PropTypes.number,
   paddingLevelHeaderX: PropTypes.number,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  sortMethod: PropTypes.func,
-  activeSort: PropTypes.string,
   mobile: PropTypes.bool,
   desktop: PropTypes.bool
 };
@@ -233,8 +228,6 @@ TableHeaderCell.defaultProps = {
   paddingLevelHeaderY: 1,
   paddingLevelHeaderX: 0,
   children: null,
-  sortMethod: () => {},
-  activeSort: '',
   mobile: false,
   desktop: false
 };
@@ -293,7 +286,6 @@ TableHeader.defaultProps = {
 /**
  * Table component is creating a table with defined header and data rows.
  * It consumes different components like TableHeader, TableRow and TableCell which can either be custom or default.
- * Supports sorting as well.
  * @class
  * @param {Table~propTypes} props - Table props.
  * @returns {ReactElement}

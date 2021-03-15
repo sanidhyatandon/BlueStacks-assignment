@@ -1,6 +1,5 @@
 import { LIVE, PAST, UPCOMING } from '../constants';
 const checkDateStatus = date2 => {
-  debugger;
   let status;
   const result = new Date().setHours(0, 0, 0, 0) - new Date(Number(date2)).setHours(0, 0, 0, 0);
 
@@ -29,4 +28,10 @@ const checkDateStatus = date2 => {
   return status;
 };
 
-export { checkDateStatus };
+/**
+ * Check if its mobile device or not
+ * @returns {boolean} empty or not
+ */
+const isMobileDevice = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+export { checkDateStatus, isMobileDevice };

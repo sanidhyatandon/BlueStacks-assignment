@@ -6,7 +6,6 @@ import DashboardView from '../../components/Dashboard';
 
 const Dashboard = () => {
   const [campaigns, setCampaigns] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   const scheduleCampaign = (id, value) => {
     const {
@@ -27,7 +26,6 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
     const {
       getCampaigns: { url: getCampaignsURL }
     } = apiConfig;
@@ -35,7 +33,6 @@ const Dashboard = () => {
       .get(getCampaignsURL)
       .then(({ data }) => {
         setCampaigns(data);
-        setIsLoading(false);
       })
       .catch(error => console.log(error));
   }, []);

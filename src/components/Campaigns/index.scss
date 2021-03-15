@@ -1,10 +1,22 @@
 .modal-body {
+  outline: none;
   position: absolute !important;
   background-color: #fff;
-  border: '2px solid #000';
   left: 30%;
   top: 30%;
   width: 500px;
+
+  @media screen and (max-width: 768px) {
+    left: 5%;
+    top: 5%;
+    width: 300px;
+
+    img {
+      width: auto;
+      height: auto;
+      margin: 16px;
+    }
+  }
 
   & button {
     position: absolute;
