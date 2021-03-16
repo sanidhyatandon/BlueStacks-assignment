@@ -180,7 +180,6 @@ const TableHeaderCell = props => {
     className
   );
   let headerLabel = headerCelldata;
-  let key;
   let htmlProps = {};
   if (typeof headerLabel === 'object') {
     const { label, desc, ...remProps } = headerCelldata;
