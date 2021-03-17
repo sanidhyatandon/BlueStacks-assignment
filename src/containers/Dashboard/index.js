@@ -8,20 +8,10 @@ const Dashboard = () => {
   const [campaigns, setCampaigns] = useState([]);
 
   const scheduleCampaign = (id, value) => {
-    const {
-      getCampaigns: { url: getCampaignsURL }
-    } = apiConfig;
     let targetCampaignIndex = campaigns.findIndex(campaign => campaign.campaignId === id);
     campaigns[targetCampaignIndex].createdOn = value;
     const requestPayload = [...campaigns];
-    // axios.put(getCampaignsURL, requestPayload, { 'Content-Type': 'application/json; charset=utf-8' });
-    fetch(`${getCampaignsURL}/1`, {
-      method: 'POST',
-      body: JSON.stringify(requestPayload),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8'
-      }
-    });
+
     setCampaigns(requestPayload);
   };
 
