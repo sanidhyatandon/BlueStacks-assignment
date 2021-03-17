@@ -1,4 +1,4 @@
-const MOCK_SERVICE = 'http://localhost:3004';
+const MOCK_SERVICE = 'https://my-json-server.typicode.com/sanidhyatandon/blustacks-server';
 
 const defaultValues = {
   retry: 0,
@@ -10,7 +10,7 @@ const localConfig = {
   // Current User
   getCampaigns: {
     ...defaultValues,
-    url: `${MOCK_SERVICE}/campaigns`
+    url: `${MOCK_SERVICE}/campaignList`
   }
 };
 
