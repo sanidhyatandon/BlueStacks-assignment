@@ -16,7 +16,7 @@ const Dashboard = () => {
     const requestPayload = [...campaigns];
     // axios.put(getCampaignsURL, requestPayload, { 'Content-Type': 'application/json; charset=utf-8' });
     fetch(`${getCampaignsURL}/1`, {
-      method: 'PUT',
+      method: 'POST',
       body: JSON.stringify(requestPayload),
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
