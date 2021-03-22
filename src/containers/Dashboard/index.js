@@ -6,6 +6,7 @@ import DashboardView from '../../components/Dashboard';
 
 const Dashboard = () => {
   const [campaigns, setCampaigns] = useState([]);
+  const [campaignsLoading, setCampaignsLoading] = useState(true);
 
   const scheduleCampaign = (id, value) => {
     let targetCampaignIndex = campaigns.findIndex(campaign => campaign.campaignId === id);
@@ -23,17 +24,19 @@ const Dashboard = () => {
       .get(getCampaignsURL)
       .then(({ data }) => {
         setCampaigns(data);
+        setCampaignsLoading(false);
       })
       .catch(error => console.log(error));
   }, []);
 
   return (
     <div>
+      {campaignsLoading && (
+        <img src="loading-icon.gif" alt="loading..." style={{ position: 'absolute', top: '50%', left: '50%' }} />
+      )}
       <div className="campaign-list">
-        {campaigns && campaigns.length ? (
+        {!campaignsLoading && campaigns && campaigns.length && (
           <DashboardView campaigns={campaigns} scheduleCampaign={scheduleCampaign} />
-        ) : (
-          <div> No Data Available</div>
         )}
       </div>
     </div>
