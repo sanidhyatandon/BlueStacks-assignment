@@ -6,6 +6,13 @@
   top: 30%;
   width: 500px;
 
+  button {
+    cursor: pointer;
+    font-weight: 700;
+    background: transparent;
+    height: 50px;
+  }
+
   @media screen and (max-width: 768px) {
     left: 5%;
     top: 5%;

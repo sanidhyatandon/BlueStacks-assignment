@@ -54,16 +54,15 @@ export const CampaignRow = props => {
 
   const body = (
     <div className="modal-body">
-      <div className={!isMobile ? 'flex mb-32' : 'align-center mb-16'}>
-        <img width={80} height={80} src={image_url} alt={name} />
-        <div className="ml-32">
-          {name}
-          <br />
-          <span className="text-small text-gray">{region}</span>
+      <div className={!isMobile ? 'flex align-end' : 'align-center mb-16'}>
+        <img src={image_url} alt={name} className="ml-24 mt-24" />
+        <div className="ml-16">
+          <h2>{name}</h2>
+          <h3 className="text-gray mb-0">{region}</h3>
         </div>
       </div>
-      <div className="ml-8 mr-8">
-        <h4>{t('pricing')}</h4>
+      <div className="ml-16 mr-24">
+        <h2>{t('pricing')}</h2>
         {!!price &&
           !!price.length &&
           price.map((elem, index) => (
