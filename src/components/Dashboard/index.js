@@ -18,7 +18,9 @@ const Dashboard = props => {
   const isMobile = isMobileDevice();
   return (
     <>
-      <div className="header-section"></div>
+      <div className="header-section">
+        <img src="bluestacks-logo.png" width="250" alt="bluestacks-logo" />
+      </div>
       <LanguageSelector />
       <div className="dashboard">
         <h1 className={classnames('header', isMobile && 'ml-24')}>{t('campaignTitle')}</h1>
