@@ -6,7 +6,6 @@ import { isMobileDevice } from '../../common/utilities';
 const LanguageSelector = () => {
   const { i18n } = useTranslation();
   const changeLanguage = event => {
-    console.log(event.target.value, 'event');
     i18n.changeLanguage(event.target.value);
   };
 
