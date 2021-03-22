@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import DatePicker from 'react-date-picker';
 import { Modal } from '@material-ui/core';
-import { MdInsertDriveFile, MdGraphicEq } from 'react-icons/md';
-import { GoCalendar } from 'react-icons/go';
 import { isMobileDevice } from '../../common/utilities';
 
 import { Table, TableRow, TableCell } from '../../common/Table';
@@ -14,6 +13,7 @@ import './index.scss';
 export const CampaignRow = props => {
   const { t } = useTranslation();
   const isMobile = isMobileDevice();
+  console.log(isMobile);
 
   // Destructure Incoming props.
   const {
@@ -109,25 +109,35 @@ export const CampaignRow = props => {
           </div>
         </TableCell>
         <TableCell width="20%">
-          <button className="btn-link" onClick={handlePricingModalOpen}>
-            {t('viewPricing')}
-          </button>
+          <div className={classnames(isMobile ? 'align-center' : 'flex flex-center')}>
+            <img src="price.png" width={20} height={20} alt="price" className={classnames(!isMobile && 'mr-8')} />
+            <button className="btn-link" onClick={handlePricingModalOpen}>
+              {t('viewPricing')}
+            </button>
+          </div>
           <Modal open={pricingModalOpen} onClose={handlePricingModalClose}>
             {body}
           </Modal>
         </TableCell>
         <TableCell width="60%">
           <div className={!isMobile && 'flex'}>
-            <div className={isMobile && 'mb-8'}>
-              <MdInsertDriveFile size={20} className="pointer mr-8" color="#16a769" />
+            <div className={classnames(isMobile ? 'mb-8' : 'flex flex-center')}>
+              <img src="file.png" width={20} height={20} alt="report" className="pointer mr-8" />
               <label className="mr-24 small">CSV</label>
             </div>
-            <div className={isMobile && 'mb-8'}>
-              <MdGraphicEq size={20} className="pointer mr-8" color="#16a769" />
+            <div className={classnames(isMobile ? 'mb-8' : 'flex flex-center')}>
+              <img src="statistics-report.png" width={20} height={20} alt="file" className="pointer mr-8" />
               <label className="mr-24 small">{t('report')}</label>
             </div>
-            <div className={isMobile && 'mb-8'}>
-              <GoCalendar size={20} className="pointer mr-8" color="#16a769" onClick={handleDatePickerOpen} />
+            <div className={classnames(isMobile ? 'mb-8' : 'flex flex-center')}>
+              <img
+                src="calendar.png"
+                width={20}
+                height={20}
+                alt="file"
+                className="pointer mr-8"
+                onClick={handleDatePickerOpen}
+              />
               <label className="mr-24 small">{t('scheduleAgain')}</label>
             </div>
             <Modal open={datePickerOpen} onClose={handleDatePickerClose}>
@@ -154,6 +164,7 @@ const Campaigns = props => {
         rowsData={campaigns}
         rowProps={{ scheduleCampaign }}
         header={getHeader()}
+        tableHeaderCellClassName="header"
         customRow={CampaignRow}
         tableHeaderSize="small"
       />

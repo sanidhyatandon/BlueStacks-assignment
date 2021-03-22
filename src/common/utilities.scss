@@ -61,6 +61,7 @@
 }
 
 .btn-link {
+  cursor: pointer;
   border: none;
   outline: none;
   background: transparent;
@@ -79,4 +80,12 @@
 
 .align-center {
   text-align: center;
+}
+
+.flex-center {
+  align-items: center;
+}
+
+.header {
+  color: #2b2b60;
 }

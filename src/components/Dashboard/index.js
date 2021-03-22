@@ -1,7 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import classnames from 'classnames';
 import Tabs from '../../common/Tabs';
 import Campaigns from '../Campaigns';
+import LanguageSelector from '../../common/LanguageSelector';
 import { checkDateStatus, isMobileDevice } from '../../common/utilities';
 import { LIVE, PAST, UPCOMING } from '../../constants';
 
@@ -15,20 +17,24 @@ const Dashboard = props => {
   // to check if mobile device.
   const isMobile = isMobileDevice();
   return (
-    <div className="dashboard">
-      <h3 className={isMobile && 'ml-24'}>{t('campaignTitle')}</h3>
-      <Tabs>
-        <div label="Upcoming Campaigns" tabTitle={t('upcomingCampaigns')}>
-          <Campaigns campaigns={upcomingCampaigns} scheduleCampaign={scheduleCampaign} />
-        </div>
-        <div label="Live Campaigns" tabTitle={t('liveCampaigns')}>
-          <Campaigns campaigns={liveCampaigns} scheduleCampaign={scheduleCampaign} />
-        </div>
-        <div label="Past Campaigns" tabTitle={t('pastCampaigns')}>
-          <Campaigns campaigns={pastCampaigns} scheduleCampaign={scheduleCampaign} />
-        </div>
-      </Tabs>
-    </div>
+    <>
+      <div className="header-section"></div>
+      <LanguageSelector />
+      <div className="dashboard">
+        <h1 className={classnames('header', isMobile && 'ml-24')}>{t('campaignTitle')}</h1>
+        <Tabs>
+          <div label="Upcoming Campaigns" tabTitle={t('upcomingCampaigns')}>
+            <Campaigns campaigns={upcomingCampaigns} scheduleCampaign={scheduleCampaign} />
+          </div>
+          <div label="Live Campaigns" tabTitle={t('liveCampaigns')}>
+            <Campaigns campaigns={liveCampaigns} scheduleCampaign={scheduleCampaign} />
+          </div>
+          <div label="Past Campaigns" tabTitle={t('pastCampaigns')}>
+            <Campaigns campaigns={pastCampaigns} scheduleCampaign={scheduleCampaign} />
+          </div>
+        </Tabs>
+      </div>
+    </>
   );
 };
 export default Dashboard;
