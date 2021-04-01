@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import apiConfig from '../../api.config';
 import DashboardView from '../../components/Dashboard';
+import Loader from '../../common/Loader';
 
 const Dashboard = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -31,9 +32,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      {campaignsLoading && (
-        <img src="loading-icon.gif" alt="loading..." style={{ position: 'absolute', top: '50%', left: '50%' }} />
-      )}
+      {campaignsLoading && <Loader />}
       <div className="campaign-list">
         {!!campaigns && !!campaigns.length && (
           <DashboardView campaigns={campaigns} scheduleCampaign={scheduleCampaign} />

@@ -6,12 +6,17 @@ import routes from './routes/routing';
 import { createBrowserHistory } from 'history';
 import './i18n';
 import './common/utilities.scss';
+import Loader from './common/Loader';
 
 const history = createBrowserHistory();
 
 class App extends Component {
   render() {
-    return <Router history={history}>{routes}</Router>;
+    return (
+      <Suspense fallback={<Loader />}>
+        <Router history={history}>{routes}</Router>
+      </Suspense>
+    );
   }
 }
 export default App;
