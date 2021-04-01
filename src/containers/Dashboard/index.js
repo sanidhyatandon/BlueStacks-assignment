@@ -35,7 +35,7 @@ const Dashboard = () => {
         <img src="loading-icon.gif" alt="loading..." style={{ position: 'absolute', top: '50%', left: '50%' }} />
       )}
       <div className="campaign-list">
-        {!campaignsLoading && campaigns && campaigns.length && (
+        {!!campaigns && !!campaigns.length && (
           <DashboardView campaigns={campaigns} scheduleCampaign={scheduleCampaign} />
         )}
       </div>

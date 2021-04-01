@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 class Tab extends Component {
   static propTypes = {
@@ -19,14 +20,8 @@ class Tab extends Component {
       props: { activeTab, label, tabTitle }
     } = this;
 
-    let className = 'tab-list-item';
-
-    if (activeTab === label) {
-      className += ' tab-list-active';
-    }
-
     return (
-      <li className={className} onClick={onClick}>
+      <li className={classnames('tab-list-item', activeTab === label && 'tab-list-active')} onClick={onClick}>
         {tabTitle}
       </li>
     );

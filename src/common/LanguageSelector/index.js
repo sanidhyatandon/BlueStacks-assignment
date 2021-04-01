@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { isMobileDevice } from '../../common/utilities';
 
 const LanguageSelector = () => {
+  // It gets the i18n instance inside the component.
   const { i18n } = useTranslation();
   const changeLanguage = event => {
     i18n.changeLanguage(event.target.value);

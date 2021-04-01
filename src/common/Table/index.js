@@ -5,12 +5,7 @@ import './table.scss';
 
 const NO_DATA_STATE = '-';
 
-/**
- * This function return the alignment property based on the prop coming
- * @param {string} Alignment property coming in props
- * @param {number} index
- * @returns {string} Alignment property
- */
+
 const setAlignment = (aligmentProp, index) => {
   let align = 'left';
   if (aligmentProp === 'default' && index !== 0) {

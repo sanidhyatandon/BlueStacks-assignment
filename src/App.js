@@ -13,11 +13,7 @@ class App extends Component {
   render() {
     return (
       <Suspense fallback={null}>
-        <Router history={history}>
-          <>
-            {routes}
-          </>
-        </Router>
+        <Router history={history}>{routes}</Router>
       </Suspense>
     );
   }

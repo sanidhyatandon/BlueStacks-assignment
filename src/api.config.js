@@ -6,7 +6,7 @@ const defaultValues = {
   timeout: 2000
 };
 
-const localConfig = {
+const config = {
   // Current User
   getCampaigns: {
     ...defaultValues,
@@ -14,5 +14,4 @@ const localConfig = {
   }
 };
 
-const config = localConfig;
 export default config;

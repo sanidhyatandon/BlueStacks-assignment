@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
@@ -7,13 +7,14 @@ import { Modal } from '@material-ui/core';
 import { isMobileDevice } from '../../common/utilities';
 
 import { Table, TableRow, TableCell } from '../../common/Table';
+// Using Toggle Custom Hook.
+import useToggle from '../../common/customHooks/useToggle';
 
 import './index.scss';
 
 export const CampaignRow = props => {
   const { t } = useTranslation();
   const isMobile = isMobileDevice();
-  console.log(isMobile);
 
   // Destructure Incoming props.
   const {
@@ -24,29 +25,13 @@ export const CampaignRow = props => {
 
   const relativeDate = moment(Number(createdOn)).fromNow();
 
-  const [pricingModalOpen, setPricingModalOpen] = React.useState(false);
-  const [datePickerOpen, setDatePickerOpen] = useState(false);
+  const [pricingModalOpen, setPricingModal] = useToggle();
+  const [datePickerOpen, setDatePicker] = useToggle();
   const scheduleCampaignHandler = value => {
     const newDate = moment(value).format();
     const timeStamp = moment(newDate).format('x');
 
     scheduleCampaign(campaignId, timeStamp);
-  };
-
-  const handlePricingModalOpen = () => {
-    setPricingModalOpen(true);
-  };
-
-  const handlePricingModalClose = () => {
-    setPricingModalOpen(false);
-  };
-
-  const handleDatePickerOpen = () => {
-    setDatePickerOpen(true);
-  };
-
-  const handleDatePickerClose = () => {
-    setDatePickerOpen(false);
   };
 
   const priceLabels = ['1 week - 1 Month', '6 Months', '1 Year'];
@@ -72,7 +57,7 @@ export const CampaignRow = props => {
             </dl>
           ))}
       </div>
-      <button type="button" onClick={handlePricingModalClose}>
+      <button type="button" onClick={setPricingModal}>
         {t('closeModal')}
       </button>
     </div>
@@ -83,7 +68,7 @@ export const CampaignRow = props => {
       isOpen={datePickerOpen}
       onChange={scheduleCampaignHandler}
       value={new Date()}
-      onCalendarClose={handleDatePickerClose}
+      onCalendarClose={setDatePicker}
     />
   );
 
@@ -110,11 +95,11 @@ export const CampaignRow = props => {
         <TableCell width="20%">
           <div className={classnames(isMobile ? 'align-center' : 'flex flex-center')}>
             <img src="price.png" width={20} height={20} alt="price" className={classnames(!isMobile && 'mr-8')} />
-            <button className="btn-link" onClick={handlePricingModalOpen}>
+            <button className="btn-link" onClick={setPricingModal}>
               {t('viewPricing')}
             </button>
           </div>
-          <Modal open={pricingModalOpen} onClose={handlePricingModalClose}>
+          <Modal open={pricingModalOpen} onClose={setPricingModal}>
             {body}
           </Modal>
         </TableCell>
@@ -135,11 +120,11 @@ export const CampaignRow = props => {
                 height={20}
                 alt="file"
                 className="pointer mr-8"
-                onClick={handleDatePickerOpen}
+                onClick={setDatePicker}
               />
               <label className="mr-24 small">{t('scheduleAgain')}</label>
             </div>
-            <Modal open={datePickerOpen} onClose={handleDatePickerClose}>
+            <Modal open={datePickerOpen} onClose={setDatePicker}>
               {datePicker}
             </Modal>
           </div>
