@@ -11,11 +11,7 @@ const history = createBrowserHistory();
 
 class App extends Component {
   render() {
-    return (
-      <Suspense fallback={null}>
-        <Router history={history}>{routes}</Router>
-      </Suspense>
-    );
+    return <Router history={history}>{routes}</Router>;
   }
 }
 export default App;
