@@ -1,84 +1,45 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import './table.scss';
 
-const NO_DATA_STATE = '-';
-
-
-const setAlignment = (aligmentProp, index) => {
-  let align = 'left';
-  if (aligmentProp === 'default' && index !== 0) {
-    align = 'right';
-  }
-
-  if (aligmentProp === 'right') {
-    align = 'right';
-  }
-
-  if (aligmentProp === 'center') {
-    align = 'center';
-  }
-
-  return align;
-};
-
 /**
  * TableCell component contains native td tag implementation with some classes to handle the padding horizontally/vertically
  * DataNot Available state can also be handled.
+ * @class
  * @param {TableCell~propTypes} props - TableCell props.
  * @returns {ReactElement}
  */
 const TableCell = props => {
-  const { cellData, children, className, width, paddingLevelY, paddingLevelX, desktop, mobile, ...otherProps } = props;
+  const { cellData, children, className, width, ...otherProps } = props;
 
-  const tableCellClasses = classnames('table-cell', `py-${paddingLevelY}x`, `px-${paddingLevelX}x`, className);
+  const tableCellClasses = classnames('table-cell', className);
   return (
     <td className={tableCellClasses} style={{ minWidth: width, width }} {...otherProps}>
-      {children || cellData || NO_DATA_STATE}
+      {children || cellData}
     </td>
   );
 };
 
-/**
- * Complete props of TableCell.
- * @typedef {Object} TableCell~propTypes
- * @property {(string|node)} [cellData=''] This hold the data/node to be displayed on the cell.
- * @property {string} [className=''] className for the TableCell.
- * @property {string} [width='auto'] width for the Table Cell.
- * @property {number} [paddingLevelY=2] paddingLevelY for the tabelCell.
- * @property {number} [paddingLevelX=0] paddingLevelX for the tabelCell.
- * @property {(string|node)} [children=null] children for the Table Cell.
- * @property {bool} [mobile=false] - to be displayed only on mobile.
- * @property {bool} [desktop=false] - to be displayed only on desktop.
- */
 TableCell.propTypes = {
   cellData: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   className: PropTypes.string,
   width: PropTypes.string,
-  paddingLevelY: PropTypes.number,
-  paddingLevelX: PropTypes.number,
-  showNoDataState: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  mobile: PropTypes.bool,
-  desktop: PropTypes.bool
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
 };
 
 TableCell.defaultProps = {
   cellData: '',
   className: '',
   width: 'auto',
-  children: null,
-  showNoDataState: true,
-  paddingLevelY: 2,
-  paddingLevelX: 0,
-  mobile: false,
-  desktop: false
+  children: null
 };
 
 /**
  * This component is responsible to render the TableRow component, this is a default TableRow called
  * from the Table Component. default Columns can either be created from data or with rowProps.
+ * @class
  * @param {TableRow~propTypes} props - TableRow props.
  * @returns {ReactElement}
  */
@@ -88,7 +49,6 @@ const TableRow = props => {
     children,
     className,
     tableCellClassName,
-    columnAlignment,
     rowProps: { columns },
     ...otherProps
   } = props;
@@ -105,7 +65,6 @@ const TableRow = props => {
                   <TableCell
                     cellData={rowData[key]}
                     key={`cell-${index}`}
-                    align={setAlignment(columnAlignment, index)}
                     className={tableCellClassName}
                     {...otherProps}
                     {...htmlProps}
@@ -119,21 +78,10 @@ const TableRow = props => {
   );
 };
 
-/**
- * Complete props of TableRow.
- * @typedef {Object} TableRow~propTypes
- * @property {Object} [rowData={}] This hold the rowData for the Row.
- * @property {string} [className=''] ClassName for the TableRow.
- * @property {string} [tableCellClassName = ''] tableCellClassName for table cell.
- * @property {string} columnAlignment columnAlignment for table cell.
- * @property {Object} [rowProps = {}] rowProps object for the TableRow.
- * @property {(string|node)} [children = null] Children for the Table Row.
- */
 TableRow.propTypes = {
   rowData: PropTypes.instanceOf(Object),
   className: PropTypes.string,
   tableCellClassName: PropTypes.string,
-  columnAlignment: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   rowProps: PropTypes.shape({
     columns: PropTypes.arrayOf(PropTypes.instanceOf(Object))
@@ -153,31 +101,19 @@ TableRow.defaultProps = {
 
 /**
  * TableHeaderCell component contains native th tag implementation, which can also be called from a custom Header component.
+ * Sorting can also be added with headers passed as config.
+ * @class
  * @param {TableHeaderCell~propTypes} props - TableHeaderCell props.
  * @returns {ReactElement}
  */
 const TableHeaderCell = props => {
-  const {
-    headerCelldata,
-    children,
-    paddingLevelHeaderY,
-    paddingLevelHeaderX,
-    className,
-    desktop,
-    mobile,
-    ...otherProps
-  } = props;
+  const { headerCelldata, children, className, ...otherProps } = props;
 
-  const headerClasses = classnames(
-    'table-header-cell',
-    `py-${paddingLevelHeaderY}x`,
-    `px-${paddingLevelHeaderX}x`,
-    className
-  );
+  const headerClasses = classnames('table-header-cell', className);
   let headerLabel = headerCelldata;
   let htmlProps = {};
   if (typeof headerLabel === 'object') {
-    const { label, desc, ...remProps } = headerCelldata;
+    const { label, ...remProps } = headerCelldata;
     htmlProps = remProps;
     headerLabel = label;
   }
@@ -190,17 +126,6 @@ const TableHeaderCell = props => {
   );
 };
 
-/**
- * Complete props of TableHeaderCell.
- * @typedef {Object} TableHeaderCell~propTypes
- * @property {Object|string} [headerCelldata=''] This hold headerCelldata for the headerCell.
- * @property {string} [className=''] ClassName for TableHeader cell.
- * @property {(string|node)} [children=null] Children for the Table Row.
- * @property {number} [paddingLevelHeaderY=1] paddingLevelHeaderY for the TableHeaderCell.
- * @property {number} [paddingLevelHeaderX=0] paddingLevelHeaderX for the TableHeaderCell.
- * @property {bool} [mobile=false] - to be displayed only on mobile.
- * @property {bool} [desktop=false] - to be displayed only on desktop.
- */
 TableHeaderCell.propTypes = {
   headerCelldata: PropTypes.oneOfType([
     PropTypes.string,
@@ -209,21 +134,13 @@ TableHeaderCell.propTypes = {
     })
   ]),
   className: PropTypes.string,
-  paddingLevelHeaderY: PropTypes.number,
-  paddingLevelHeaderX: PropTypes.number,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  mobile: PropTypes.bool,
-  desktop: PropTypes.bool
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
 };
 
 TableHeaderCell.defaultProps = {
   headerCelldata: '',
   className: '',
-  paddingLevelHeaderY: 1,
-  paddingLevelHeaderX: 0,
-  children: null,
-  mobile: false,
-  desktop: false
+  children: null
 };
 
 /**
@@ -233,7 +150,7 @@ TableHeaderCell.defaultProps = {
  * @returns {ReactElement}
  */
 const TableHeader = props => {
-  const { header, children, className, columnAlignment, tableHeaderCellClassName, ...otherProps } = props;
+  const { header, children, className, tableHeaderCellClassName, ...otherProps } = props;
   const tableHeaderClasses = classnames('table-header', className);
   const allChild = React.Children.toArray(children);
   return (
@@ -243,7 +160,6 @@ const TableHeader = props => {
           <TableHeaderCell
             headerCelldata={headerCelldata}
             key={`header-cell-${idx}`}
-            align={setAlignment(columnAlignment, idx)}
             className={tableHeaderCellClassName}
             {...otherProps}
           />
@@ -255,7 +171,6 @@ const TableHeader = props => {
 /**
  * Complete props of TableHeader.
  * @typedef {Object} TableHeader~propTypes
- *
  * @property {(string[]|Object[])} [header=[]] This is data for the tableHeader.
  * @property {string} [className=''] ClassName for TableHeader cell.
  * @property {string} [tableHeaderCellClassName=''] tableHeaderCellClassName.
@@ -280,6 +195,7 @@ TableHeader.defaultProps = {
 /**
  * Table component is creating a table with defined header and data rows.
  * It consumes different components like TableHeader, TableRow and TableCell which can either be custom or default.
+ * Supports sorting as well.
  * @class
  * @param {Table~propTypes} props - Table props.
  * @returns {ReactElement}
@@ -290,59 +206,40 @@ const Table = props => {
     header,
     customRow,
     customHeader,
-    noBorder,
-    noLastBorder,
     tableClassName,
     tableHeaderClassName,
     tableHeaderCellClassName,
     tableRowClassName,
     tableBodyClassName,
-    tableBodySize,
-    tableHeaderSize,
     rowProps,
-    showNoDataState,
     tableCellClassName,
-    paddingLevelHeaderX,
-    paddingLevelHeaderY,
-    paddingLevelX,
-    paddingLevelY,
     ...otherProps
   } = props;
   const RowComponent = customRow || TableRow;
   const HeaderComponent = customHeader || TableHeader;
-  const tableClasses = classnames(
-    'default-table',
-    noBorder && 'no-border',
-    noLastBorder && 'no-last-border',
-    tableClassName
-  );
+  const tableClasses = classnames('default-table', tableClassName);
 
   return (
     <div className="table-wrapper">
       <table className={tableClasses}>
         {header && (
-          <thead className={classnames('table-head', `table-head-${tableHeaderSize}`)}>
+          <thead className="table-head">
             <HeaderComponent
               header={header}
               className={tableHeaderClassName}
               tableHeaderCellClassName={tableHeaderCellClassName}
-              paddingLevelHeaderX={paddingLevelHeaderX}
-              paddingLevelHeaderY={paddingLevelHeaderY}
               {...otherProps}
             />
           </thead>
         )}
-        <tbody className={classnames('table-body', tableBodyClassName, `table-body-${tableBodySize}`)}>
+        <tbody className={classnames('table-body', tableBodyClassName)}>
           {rowsData.map((rowData, index) => (
             <RowComponent
               rowData={rowData}
               key={`row-${index}`}
               className={tableRowClassName}
               rowProps={rowProps}
-              showNoDataState={showNoDataState}
               tableCellClassName={tableCellClassName}
-              paddingLevelX={paddingLevelX}
-              paddingLevelY={paddingLevelY}
               {...otherProps}
             />
           ))}
@@ -352,54 +249,17 @@ const Table = props => {
   );
 };
 
-/**
- * Complete props of Table.
- * @typedef {Object} Table~propTypes
- *
- * @property {rowsData} - This is rowsData for the table.
- * @property {(string[]|Object[])} [header=null] Header as array of string or object.
- * @property {func} [customRow=null] CustomRow Component..
- * @property {func} [customHeader=null] CustomeHeader Component.
- * @property {bool} [noBorder=false] Flag for NoBorder variant.
- * @property {bool} [showNoDataState=false] Flag for NoData State.
- * @property {number} [paddingLevelHeaderY=1] PaddingLevelY for the TableHeaderCell.
- * @property {number} [paddingLevelHeaderX=0] PaddingLevelX for the TableHeaderCell.
- * @property {number} [paddingLevelY=2] PaddingLevelY for the TableBodyCell.
- * @property {number} [paddingLevelX=0] PaddingLevelX for the TableBodyCell.
- * @property {string} [tableClassName=''] This variable is used to override the default table styling.
- * @property {string} [tableHeaderClassName=''] This variable is used to override the default table header styling.
- * @property {string} [tableHeaderCellClassName=''] This variable is used to override the default table header cell styling.
- * @property {string} [tableRowClassName=''] This variable is used to override the default table row styling.
- * @property {string} [tableCellClassName=''] This variable is used to override the default table cell styling.
- * @property {string} [tableBodyClassName=''] This variable is used to override the default table body styling.
- * @property {bool} [noLastBorder=false] Flag for no last border variant.
- * @property {('small'|'medium'|'large')} [tableHeaderSize='medium'] This is used to set the size for Header.
- * @property {('default'|'left'|'right'|'center')} [columnAlignment='default'] This is used to set the alignment for each column.
- * @property {('small'|'medium'|'large')}  [tableBodySize='medium'] This is used to set the size for body content.
- * @property {object} [rowProps={}] Custom rows props for the rows.
- * @property {object} [columns=[]] Columns props for the rows
- */
 Table.propTypes = {
   rowsData: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired,
   header: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)])),
   customRow: PropTypes.func,
   customHeader: PropTypes.func,
-  noBorder: PropTypes.bool,
-  showNoDataState: PropTypes.bool,
-  paddingLevelHeaderY: PropTypes.number,
-  paddingLevelHeaderX: PropTypes.number,
-  paddingLevelY: PropTypes.number,
-  paddingLevelX: PropTypes.number,
   tableClassName: PropTypes.string,
   tableHeaderClassName: PropTypes.string,
   tableHeaderCellClassName: PropTypes.string,
   tableRowClassName: PropTypes.string,
   tableCellClassName: PropTypes.string,
   tableBodyClassName: PropTypes.string,
-  noLastBorder: PropTypes.bool,
-  tableHeaderSize: PropTypes.oneOf(['small', 'medium', 'large']),
-  columnAlignment: PropTypes.oneOf(['default', 'left', 'right', 'center']),
-  tableBodySize: PropTypes.oneOf(['small', 'medium', 'large']),
   rowProps: PropTypes.shape({
     columns: PropTypes.arrayOf(PropTypes.instanceOf(Object))
   })
@@ -409,22 +269,12 @@ Table.defaultProps = {
   header: null,
   customRow: null,
   customHeader: null,
-  noBorder: false,
-  showNoDataState: true,
-  paddingLevelHeaderY: 1,
-  paddingLevelHeaderX: 0,
-  paddingLevelY: 2,
-  paddingLevelX: 0,
   tableClassName: '',
   tableHeaderClassName: '',
   tableHeaderCellClassName: '',
   tableRowClassName: '',
   tableCellClassName: '',
   tableBodyClassName: '',
-  noLastBorder: false,
-  tableHeaderSize: 'medium',
-  tableBodySize: 'medium',
-  columnAlignment: 'default',
   rowProps: {
     columns: []
   }
