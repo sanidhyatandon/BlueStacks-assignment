@@ -34,27 +34,5 @@
         }
       }
     }
-
-    .no-border {
-      .table-head {
-        .table-header {
-          border-bottom: none;
-        }
-      }
-
-      .table-body {
-        .table-row {
-          border-bottom: none;
-        }
-      }
-    }
-
-    .no-last-border {
-      .table-body {
-        .table-row:last-child {
-          border-bottom: none;
-        }
-      }
-    }
   }
 }
