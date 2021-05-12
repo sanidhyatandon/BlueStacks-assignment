@@ -1,6 +1,6 @@
-# BlueStacks
+# ClassPlus
 
-The repository contains all the core components and the features specific to BlueStacks.
+The repository contains all the core components and the features specific to Class Plus.
 
 # Environment Setup
 
@@ -14,12 +14,6 @@ After your node and yarn is working, install all dependencies by running followi
 yarn install
 ```
 
-Start the mock JSON server
-
-```
-yarn start:mock
-```
-
 Start the Webpack Dev Server
 
 ```
@@ -31,7 +25,7 @@ yarn start
 Here are some steps a developer must do in order to start developing the project further:
 
 ```
-git clone https://github.com/sanidhyatandon/BlueStacks-assignment.git
+git clone https://github.com/sanidhyatandon/ClassPlus.git
 yarn install
 yarn start
 ```
