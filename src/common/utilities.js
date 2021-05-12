@@ -1,37 +1,30 @@
-import { LIVE, PAST, UPCOMING } from '../constants';
-const checkDateStatus = date2 => {
-  let status;
-  const result = new Date().setHours(0, 0, 0, 0) - new Date(Number(date2)).setHours(0, 0, 0, 0);
+function debounce(func, wait, immediate) {
+  let timeout;
+  return (...args) => {
+    const context = this;
+    const later = () => {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    const callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+}
 
-  switch (result > 0) {
-    case true:
-      status = PAST;
-      break;
-    case false:
-      switch (result < 0) {
-        case true:
-          status = UPCOMING;
-          break;
-        case false:
-          status = LIVE;
-          break;
-        default: {
-          status = LIVE;
-        }
-      }
-      break;
-    default: {
-      status = LIVE;
+const throttle = (func, limit) => {
+  let inThrottle;
+  return (...args) => {
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => {
+        inThrottle = false;
+      }, limit);
     }
-  }
-
-  return status;
+  };
 };
 
-/**
- * Check if its mobile device or not
- * @returns {boolean} empty or not
- */
-const isMobileDevice = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-export { checkDateStatus, isMobileDevice };
+export { debounce, throttle };

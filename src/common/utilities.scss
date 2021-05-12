@@ -1,103 +1,14 @@
-@import 'datePicker';
-
-.flex {
+ul {
+  list-style: none;
   display: flex;
+  flex-wrap: wrap;
 }
 
-.flex--1 {
-  flex: 1;
+li {
+  padding: 20px;
 }
 
-.text-small {
-  font-size: 10px;
-}
-
-.text-gray {
-  color: #666;
-}
-
-.ml-8 {
-  margin-left: 8px;
-}
-
-.ml-16 {
-  margin-left: 16px;
-}
-
-.ml-24 {
-  margin-left: 24px;
-}
-
-.ml-32 {
-  margin-left: 32px;
-}
-
-.mb-0 {
-  margin-bottom: 0;
-}
-
-.mb-8 {
-  margin-bottom: 8px;
-}
-
-.mb-16 {
-  margin-bottom: 16px;
-}
-
-.mb-32 {
-  margin-bottom: 32px;
-}
-
-.mb-64 {
-  margin-bottom: 64px;
-}
-
-.mr-8 {
-  margin-right: 8px;
-}
-
-.mr-24 {
-  margin-right: 20px;
-}
-
-.mt-24 {
-  margin-top: 24px;
-}
-
-.pointer {
+img,
+button {
   cursor: pointer;
-}
-
-.btn-link {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background: transparent;
-  line-height: 1.25;
-  min-width: auto;
-  padding: 0;
-  outline: none;
-  @media screen and (max-width: 768px) {
-    font-size: 10px;
-  }
-}
-
-.align-right {
-  text-align: right;
-}
-
-.align-center {
-  text-align: center;
-}
-
-.flex-center {
-  align-items: center;
-}
-
-.align-end {
-  align-items: flex-end;
-}
-
-.header {
-  color: #2b2b60;
 }

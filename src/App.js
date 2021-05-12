@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import routes from './routes/routing';
 import { createBrowserHistory } from 'history';
-import './i18n';
 import './common/utilities.scss';
 
 const history = createBrowserHistory();
