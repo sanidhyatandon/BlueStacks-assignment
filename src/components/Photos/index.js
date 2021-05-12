@@ -20,6 +20,7 @@ const Photos = (props, ref) => {
   const {
     getImage: { url: getImageURL }
   } = apiConfig;
+
   return (
     <div className="photos-container">
       <div className="photo-search-container">
@@ -28,16 +29,22 @@ const Photos = (props, ref) => {
       </div>
       <div className="photo-results" ref={ref}>
         <ul>
-          {photo.map(({ id, server, secret, title }) => (
-            <li key={id}>
-              <img
-                className="photo-img"
-                src={`${getImageURL}/${server}/${id}_${secret}_w.jpg}`}
-                alt={title}
-                onClick={event => onPhotoClick(event, { id, server, secret, title })}
-              />
-            </li>
-          ))}
+          {photo.length ? (
+            photo.map(({ id, server, secret, title }) => (
+              <li key={id}>
+                <img
+                  className="photo-img"
+                  src={`${getImageURL}/${server}/${id}_${secret}_w.jpg}`}
+                  alt={title}
+                  onClick={event => onPhotoClick(event, { id, server, secret, title })}
+                />
+              </li>
+            ))
+          ) : (
+            <div className="no-data-wrapper">
+              <h1>{`No data matching the query.`}</h1>
+            </div>
+          )}
         </ul>
         {isOpen && (
           <Modal isClose handleModalClose={onModalClose}>

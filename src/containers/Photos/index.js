@@ -16,7 +16,7 @@ const Photos = () => {
   const handleScroll = () => {
     if (
       resultsRef.current &&
-      window.pageYOffset + window.innerHeight > resultsRef.current.clientHeight - window.outerHeight * 0.3
+      window.pageYOffset + window.innerHeight > resultsRef.current.clientHeight - window.outerHeight * 0.6
     ) {
       setPage(page => page + 1);
     }
@@ -24,7 +24,7 @@ const Photos = () => {
 
   useEffect(() => {
     resultsRef.current.addEventListener('scroll', throttle(handleScroll, 1000));
-    return () => window.removeEventListener('scroll', throttle(handleScroll, 1000));
+    // return () => resultsRef.current.removeEventListener('scroll', throttle(handleScroll, 1000));
   }, []);
 
   useEffect(() => {
