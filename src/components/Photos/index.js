@@ -12,7 +12,8 @@ const Photos = (props, ref) => {
     handleSearch,
     onPhotoClick,
     onModalClose,
-    photoClickData
+    photoClickData,
+    isLoading
   } = props || {};
 
   const { id, server, secret, title } = photoClickData || {};
@@ -40,10 +41,12 @@ const Photos = (props, ref) => {
                 />
               </li>
             ))
-          ) : (
+          ) : !isLoading ? (
             <div className="no-data-wrapper">
               <h1>{`No data matching the query.`}</h1>
             </div>
+          ) : (
+            ''
           )}
         </ul>
         {isOpen && (
