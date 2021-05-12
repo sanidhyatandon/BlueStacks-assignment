@@ -51,7 +51,7 @@ const Photos = (props, ref) => {
         </ul>
         {isOpen && (
           <Modal isClose handleModalClose={onModalClose}>
-            <img className="photo-img" src={`${getImageURL}/${server}/${id}_${secret}_w.jpg}`} alt={title} />
+            <img className="photo-modal-img" src={`${getImageURL}/${server}/${id}_${secret}_m.jpg}`} alt={title} />
           </Modal>
         )}
       </div>
